@@ -2,6 +2,7 @@ import csv
 
 import polib
 
+POFILE = 'empty.po'
 
 def main():
     with open('empty.tsv', newline='') as tsv:
@@ -18,7 +19,12 @@ def main():
     length = len(id)
     for i in range(1, length):
         po.append(polib.POEntry(msgid=id[i], msgstr=translated[i]))
-    po.save('empty.po')
+    po.save(POFILE)
+
+    with open(POFILE, mode='r') as f:
+        read = f.readlines()
+    for i in range(1, length, 3):
+        read.insert(i, f'#: {comment[i]}')
 
 
 if __name__ == '__main__':
