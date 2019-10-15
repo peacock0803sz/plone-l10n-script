@@ -1,0 +1,11 @@
+plone:
+  image: plone/plone:5.2
+  volumes:
+    - ./plone-data/filestorage:/data/filestorage
+    - ./plone-data/blobstorage:/data/blobstorage
+    - ./plone-data/src:/plone/instance/src
+    - ./custom.cfg:/plone/instance/custom.cfg
+  ports:
+    - "8080:8080"
+  environment:
+    ZCML: /plone/instance/custom.cfg
