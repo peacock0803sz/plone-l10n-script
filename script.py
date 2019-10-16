@@ -1,6 +1,7 @@
 import csv
 
 POFILE = 'plone.po'
+ID_PREFIX = 'msgid "'
 
 
 def main():
