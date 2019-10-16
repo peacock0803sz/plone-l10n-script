@@ -1,6 +1,6 @@
 import csv
 
-POFILE = 'plone.po'
+POFILE = 'plone-data/src/plone.app.locales/plone/app/locales/locales/ja/LC_MESSAGES/plone.po'
 ID_PREFIX = 'msgid "'
 
 
