@@ -15,20 +15,18 @@ def main():
         del(msgstr[:1])
 
     with open(POFILE, mode='r') as f:
-        meta = 0
-        msg_index = []
-        line = f.readlines()
-        for i in range(len(line)):
-            for j in range(len(msgid)):
-                if line[i].startswith(f'msgid "{msgid[j]}'):
-                    msg_index.append(i + 1)
-        if line[i].startswith('#:'):
-            meta += 1
+        target = []
+        lines = f.readlines()
+        for line in lines:
+            if line.startswith(ID_PREFIX):
+                for i in range(len(msgid)):
+                    if line == f'msgid "{msgid[i]}"\n':
+                        target.append(lines.index(line) + 1)
         for i in range(len(msgstr)):
-            del(line[msg_index[i]])
-            line.insert(msg_index[i] - meta, f'msgstr "{msgstr[i]}"\n')
+            del lines[target[i]]
+            lines.insert(target[i], f'msgstr "{msgstr[i]}"\n\n')
     with open(POFILE, mode='w') as f:
-        for i in line:
+        for i in lines:
             f.write(i)
 
 
